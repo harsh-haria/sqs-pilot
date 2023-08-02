@@ -27,5 +27,10 @@ response = client.receive_message(
     VisibilityTimeout=0,
     WaitTimeSeconds=0
 )
+print(response['Messages'][0])
+uniqueHandle = response['Messages'][0]['ReceiptHandle']
 
-print(response['Messages'])
+client.delete_message(
+    QueueUrl = queueUrl,
+    ReceiptHandle = uniqueHandle
+)

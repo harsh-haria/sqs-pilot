@@ -15,5 +15,16 @@ client = boto3.resource(
 
 queue = client.get_queue_by_name(QueueName = queueName)
 
-response = queue.send_message(MessageBody="Hello World 3")
+response = queue.send_messages(Entries=[
+    {
+        "Id": "1",
+        "MessageBody": "checkout",
+        "MessageAttributes":{
+            "product":{
+                "StringValue": "ObjectId('64c4fe9c9fdabe7f8111bc3c')",
+                "DataType":"String"
+            }
+        }
+    }
+])
 print(response)
